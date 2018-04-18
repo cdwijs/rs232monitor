@@ -69,11 +69,11 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     m_ui(new Ui::SettingsDialog),
     m_intValidator(new QIntValidator(0, 4000000, this))
 {
-    objectCount++;
     myIndex = objectCount;
+    objectCount++;
     m_ui->setupUi(this);
-    qDebug()<<Q_FUNC_INFO;
-    qDebug()<<myIndex;
+    //qDebug()<<Q_FUNC_INFO;
+    //qDebug()<<myIndex;
     m_ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
 
     connect(m_ui->applyButton, &QPushButton::clicked,
@@ -198,11 +198,21 @@ void SettingsDialog::fillPortsInfo()
     }
 
     m_ui->serialPortInfoListBox->addItem(tr("Custom"));
+    //m_ui->TerminatorlineEdit->setText("m_currentSettings.name");
 }
 
 void SettingsDialog::updateSettings()
 {
     m_currentSettings.name = m_ui->serialPortInfoListBox->currentText();
+    m_currentSettings.terminators = m_ui->TerminatorlineEdit->text();
+    if (m_ui->newlineCheckBox->isChecked())
+    {
+        m_currentSettings.terminators.append('\n');
+    }
+    if (m_ui->carriageReturnCheckBox->isChecked())
+    {
+        m_currentSettings.terminators.append('\r');
+    }
 
     if (m_ui->baudRateBox->currentIndex() == 5) {
         m_currentSettings.baudRate = m_ui->baudRateBox->currentText().toInt();
@@ -237,14 +247,18 @@ void SettingsDialog::readSettings()
     string.sprintf("RS232 %d",myIndex);
     QSettings * settings = new QSettings;
     settings->setDefaultFormat(QSettings::IniFormat);
-    qDebug()<<"Reading settings from:"<< settings->fileName();
+    //qDebug()<<"Reading settings from:"<< settings->fileName();
 
     settings->beginGroup(string);
 
     m_currentSettings.name=settings->value("commport").toString();
+    m_currentSettings.terminators=settings->value("terminators").toString();
     m_currentSettings.baudRate =settings->value("baudrate").toInt();
     m_ui->serialPortInfoListBox->setCurrentIndex(settings->value("commportindex").toInt());
     m_ui->baudRateBox->setCurrentIndex(settings->value("baudrateindex").toInt());
+    m_ui->TerminatorlineEdit->setText(m_currentSettings.terminators);
+    m_ui->newlineCheckBox->setChecked(m_currentSettings.terminators.contains('\r'));
+    m_ui->carriageReturnCheckBox->setChecked(m_currentSettings.terminators.contains('\n'));
     /*
     restoreGeometry(settings->value("geometry").toByteArray());
 
@@ -267,9 +281,10 @@ void SettingsDialog::writeSettings()
     qDebug()<<string;
     QSettings * settings = new QSettings;
     settings->setDefaultFormat(QSettings::IniFormat);
-    qDebug()<<"Writing settings to:"<< settings->fileName();
+    //qDebug()<<"Writing settings to:"<< settings->fileName();
     settings->beginGroup(string);
     settings->setValue("commport",m_currentSettings.name);
+    settings->setValue("terminators",m_currentSettings.terminators);
     settings->setValue("commportindex",m_ui->serialPortInfoListBox->currentIndex());
     settings->setValue("baudrate",m_currentSettings.baudRate);
     settings->setValue("baudrateindex",m_ui->baudRateBox->currentIndex());

@@ -72,6 +72,7 @@ class SettingsDialog : public QDialog
 public:
     struct Settings {
         QString name;
+        QString terminators;
         qint32 baudRate;
         QString stringBaudRate;
  /*       QSerialPort::DataBits dataBits;

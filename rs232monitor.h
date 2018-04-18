@@ -5,6 +5,9 @@
 #include <QWidget>
 #include "rs232.h"
 #include <QObject>
+#include <QPlainTextEdit>
+#include <QTimer>
+#include "filewriter.h"
 
 class RS232MONITOR : public QWidget
 {
@@ -15,15 +18,25 @@ public:
 public slots:
     slotParseRx(QString msg);
     slotParseTx(QString msg);
+    slotClear(bool clicked);
+
+
 signals:
     sigForwardRx(QString msg);
     sigForwardTx(QString msg);
+    sigOpenTx(bool clicked);
+    sigOpenRx(bool clicked);
+    sigToFile(QString msg);
 private:
     RS232 *rs232Rx;
     RS232 *rs232Tx;
-    QTextBrowser *myLog;
+    QPlainTextEdit *myLog;
     QSplitter *myHlayout;
     QSplitter *myVlayout;
+    QPushButton *myClearBtn;
+    QLabel *myRxLabel;
+    QLabel *myTxLabel;
+    FileWriter *myFileWriter;
 };
 
 #endif // RS232MONITOR_H

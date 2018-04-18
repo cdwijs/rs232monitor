@@ -9,7 +9,7 @@ const unsigned char RS232_CR=0x0D;
 
 RS232::RS232(QWidget *parent)
 {
-    qDebug()<<Q_FUNC_INFO;
+    //qDebug()<<Q_FUNC_INFO;
 #ifdef FAKE_MESSAGES
     myTimer = new QTimer();
     connect(myTimer,&QTimer::timeout,this,&RS232::slotTimer);
@@ -29,7 +29,7 @@ RS232::RS232(QWidget *parent)
     myLabel = new QLabel("COM-");
 
     mySettingsBtn = new QPushButton;
-    mySettingsBtn->setIcon(QIcon(":/images/settings.png"));
+    mySettingsBtn->setIcon(QIcon(":/images/wrench.png"));
     mySettingsBtn->setToolTip("Settings");
 
     myConnectBtn = new QPushButton;
@@ -139,6 +139,7 @@ RS232::slotMessage(QString string)
 
 RS232::slotRx()
 {
+    const SettingsDialog::Settings p = mySettingsDia->settings();
     //qDebug()<<"slotRx";
     int numstrings=0;
     bool endofstringseen=false;
@@ -149,7 +150,8 @@ RS232::slotRx()
     {
         unsigned char rxchar;
         rxchar = data.at(i);
-        if (rxchar == RS232_TERMINATION_CHAR/* || rxchar == RS232_CR*/)
+        QString str(rxchar);
+        if (p.terminators.contains(str))
         {
             numstrings++;
         }
@@ -167,7 +169,9 @@ RS232::slotRx()
             unsigned char rxchar;
             rxchar = myRxQueue->dequeue();
             rxstring.append(rxchar);
-            if (rxchar == RS232_TERMINATION_CHAR/* || rxchar == RS232_CR*/)
+
+            QString str(rxchar);
+            if (p.terminators.contains(str))
             {
                 emit sigReceived(rxstring);
                 rxstring.clear();

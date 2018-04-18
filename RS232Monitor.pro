@@ -28,13 +28,15 @@ SOURCES += \
     rs232.cpp \
     settingsdialog.cpp \
     ledindicator.cpp \
-    rs232monitor.cpp
+    rs232monitor.cpp \
+    filewriter.cpp \
 
 HEADERS += \
     rs232.h \
     settingsdialog.h \
     ledindicator.h \
-    rs232monitor.h
+    rs232monitor.h \
+    filewriter.h \
 
 FORMS += \
     settingsdialog.ui
@@ -61,4 +63,7 @@ Release: QMAKE_EXTRA_TARGETS += qmakeforce
 
 #show the value of all defines: https://forum.qt.io/topic/82531/defines-in-qt-creator/9
 message($$DEFINES)
+
+RESOURCES += \
+    images.qrc
 

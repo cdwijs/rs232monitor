@@ -8,9 +8,9 @@ int main(int argc, char *argv[])
 {
     QString git=GIT_COMMIT;
     QString git_url=GIT_URL;
-    //qDebug() << "Git:" << qPrintable(git);
-    //qDebug() << "Repository:" << qPrintable(git_url);
-    //qDebug() << "Build:" << __DATE__ << __TIME__;
+    qDebug() << "Git:" << qPrintable(git);
+    qDebug() << "Repository:" << qPrintable(git_url);
+    qDebug() << "Build:" << __DATE__ << __TIME__;
     QApplication::setOrganizationName("LUMC");
     QApplication::setOrganizationDomain("lumc.nl");
     QApplication::setApplicationName("Rs232Monitor");
