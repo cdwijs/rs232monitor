@@ -4,7 +4,7 @@
 #define KEY_DIRECTORY "Directory"
 #define DEFAULT_DIRECTORY ""
 
-FileWriter::FileWriter(QWidget *parent)
+void FileWriter::FileWriter(QWidget *parent)
 {
     //qDebug()<<Q_FUNC_INFO;
 
@@ -24,7 +24,7 @@ FileWriter::FileWriter(QWidget *parent)
     connect(myFileBtn,&QPushButton::clicked,this,&FileWriter::slotFile);
 }
 
-FileWriter::slotRx(QString msg)
+void FileWriter::slotRx(QString msg)
 {
     //store the msg in the file here
 
@@ -43,7 +43,7 @@ FileWriter::slotRx(QString msg)
     }
 }
 
-FileWriter::slotFile(bool clicked)
+void FileWriter::slotFile(bool clicked)
 {
     //close the file when clicked again
     if (myFile->isOpen())
@@ -94,7 +94,7 @@ FileWriter::slotFile(bool clicked)
 }
 
 
-FileWriter::slotTimer()
+void FileWriter::slotTimer()
 {
     myFileBtn->setIcon(QIcon("://images/disk.png"));
 }
