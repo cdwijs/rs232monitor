@@ -48,6 +48,7 @@ RS232::RS232(QWidget *parent)
     myTxLED->setToolTip("Tx");
 
     myHlayout = new QSplitter();
+    myHlayout->setChildrenCollapsible(false);
     myHlayout->setOrientation(Qt::Horizontal);
     myHlayout->addWidget(myLabel);
     myHlayout->addWidget(myTxLED);

@@ -15,6 +15,7 @@ RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
     myClearBtn->setToolTip("Clear");
     myLog = new QPlainTextEdit();
     myHlayout = new QSplitter();
+    myHlayout->setChildrenCollapsible(false);
     myHlayout->setOrientation(Qt::Horizontal);
     myHlayout->addWidget(myRxLabel);
     rs232Rx = new RS232(myHlayout);
@@ -23,6 +24,7 @@ RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
     rs232Tx = new RS232(myHlayout);
     myHlayout->addWidget(rs232Tx);
     myVlayout = new QSplitter();
+    myVlayout->setChildrenCollapsible(false);
     myVlayout->setOrientation(Qt::Vertical);
     myHlayout->addWidget(myClearBtn);
     myFileWriter = new FileWriter(myHlayout);
