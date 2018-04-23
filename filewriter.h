@@ -13,7 +13,7 @@
 class FileWriter : public QWidget
 {
 public:
-    void FileWriter(QWidget *parent=0);
+    FileWriter(QWidget *parent=0);
 public slots:
     void slotRx(QString msg);
     void slotFile(bool clicked);

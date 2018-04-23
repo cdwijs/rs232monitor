@@ -4,7 +4,7 @@
 #define KEY_DIRECTORY "Directory"
 #define DEFAULT_DIRECTORY ""
 
-void FileWriter::FileWriter(QWidget *parent)
+FileWriter::FileWriter(QWidget *parent)
 {
     //qDebug()<<Q_FUNC_INFO;
 
