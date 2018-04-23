@@ -16,7 +16,7 @@ FileWriter::FileWriter(QWidget *parent)
     myFileBtn->setIcon(QIcon("://images/disk_edit.png"));
     myFileBtn->setToolTip("File");
 
-    connect(myTimer,&QTimer::timeout,this,slotTimer);
+    connect(myTimer,&QTimer::timeout,this,&FileWriter::slotTimer);
     myHlayout->setOrientation(Qt::Horizontal);
     myHlayout->addWidget(myFileBtn);
     myHlayout->setParent(parent);
