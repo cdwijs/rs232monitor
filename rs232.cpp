@@ -7,7 +7,7 @@ const unsigned char RS232_TERMINATION_CHAR=0x3B;
 const unsigned char RS232_CR=0x0D;
 
 
-void RS232::RS232(QWidget *parent)
+RS232::RS232(QWidget *parent)
 {
     //qDebug()<<Q_FUNC_INFO;
 #ifdef FAKE_MESSAGES
@@ -59,8 +59,8 @@ void RS232::RS232(QWidget *parent)
     connect(mySettingsBtn,&QPushButton::clicked,this,&RS232::slotSettings);
     connect(myConnectBtn,&QPushButton::clicked,this,&RS232::slotConnect);
     connect(mySerialPort,&QSerialPort::readyRead,this,&RS232::slotRx);
-    connect(myRxTimer,&QTimer::timeout,this,slotRxTimer);
-    connect(myTxTimer,&QTimer::timeout,this,slotTxTimer);
+    connect(myRxTimer,&QTimer::timeout,this,&RS232::slotRxTimer);
+    connect(myTxTimer,&QTimer::timeout,this,&RS232::slotTxTimer);
     myHlayout->setParent(parent);
     myHlayout->show();
 }
