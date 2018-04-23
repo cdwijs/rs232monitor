@@ -4,7 +4,7 @@
 const int MAX_LOG_BLOCKS=1000;
 
 
-void RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
+RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
 {
    //qDebug()<<Q_FUNC_INFO;
 
