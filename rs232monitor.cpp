@@ -37,7 +37,7 @@ RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
 
     connect(rs232Rx,&RS232::sigReceived,this,&RS232MONITOR::slotParseRx);
     connect(rs232Tx,&RS232::sigReceived,this,&RS232MONITOR::slotParseTx);
-    connect(myClearBtn,&QPushButton::clicked,this,slotClear);
+    connect(myClearBtn,&QPushButton::clicked,this,&RS232MONITOR::slotClear);
     connect(this,&RS232MONITOR::sigOpenRx,rs232Rx,&RS232::slotConnect);
     connect(this,&RS232MONITOR::sigOpenTx,rs232Tx,&RS232::slotConnect);
     connect(this,&RS232MONITOR::sigToFile,myFileWriter,&FileWriter::slotRx);
