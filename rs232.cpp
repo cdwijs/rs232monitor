@@ -7,7 +7,7 @@ const unsigned char RS232_TERMINATION_CHAR=0x3B;
 const unsigned char RS232_CR=0x0D;
 
 
-RS232::RS232(QWidget *parent)
+void RS232::RS232(QWidget *parent)
 {
     //qDebug()<<Q_FUNC_INFO;
 #ifdef FAKE_MESSAGES
@@ -65,12 +65,12 @@ RS232::RS232(QWidget *parent)
     myHlayout->show();
 }
 
-RS232::slotSettings(bool clicked)
+void RS232::slotSettings(bool clicked)
 {
     mySettingsDia->show();
 }
 
-RS232::slotConnect(bool clicked)
+void RS232::slotConnect(bool clicked)
 {
     const SettingsDialog::Settings p = mySettingsDia->settings();
     if(mySerialPort->isOpen())
@@ -103,7 +103,7 @@ RS232::slotConnect(bool clicked)
     }
 }
 
-RS232::slotDisconnect(bool clicked)
+void RS232::slotDisconnect(bool clicked)
 {
     const SettingsDialog::Settings p = mySettingsDia->settings();
     if(mySerialPort->isOpen())
@@ -120,7 +120,7 @@ RS232::slotDisconnect(bool clicked)
     }
 }
 
-RS232::slotMessage(QString string)
+void RS232::slotMessage(QString string)
 {
     //qDebug()<<string;
     QByteArray mydata;
@@ -138,7 +138,7 @@ RS232::slotMessage(QString string)
     }
 }
 
-RS232::slotRx()
+void RS232::slotRx()
 {
     const SettingsDialog::Settings p = mySettingsDia->settings();
     //qDebug()<<"slotRx";
@@ -186,18 +186,18 @@ RS232::slotRx()
     }
 }
 
-RS232::slotRxTimer()
+void RS232::slotRxTimer()
 {
     myRxLED->setState(false);
 }
 
-RS232::slotTxTimer()
+void RS232::slotTxTimer()
 {
     myTxLED->setState(false);
 }
 
 #ifdef FAKE_MESSAGES
-RS232::slotTimer()
+void RS232::slotTimer()
 {
     QString string("\COMMUNICATION");
     string.append(0x0D); //is \r  (\n is 0x0A)

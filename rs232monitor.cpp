@@ -4,7 +4,7 @@
 const int MAX_LOG_BLOCKS=1000;
 
 
-RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
+void RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
 {
    //qDebug()<<Q_FUNC_INFO;
 
@@ -46,7 +46,7 @@ RS232MONITOR::RS232MONITOR(QWidget *parent) : QWidget(parent)
     //connect()
 }
 
-RS232MONITOR::slotParseRx(QString msg)
+void RS232MONITOR::slotParseRx(QString msg)
 {
     //qDebug()<<Q_FUNC_INFO;
     emit sigForwardRx(msg);
@@ -55,7 +55,7 @@ RS232MONITOR::slotParseRx(QString msg)
     emit sigToFile(msg);
 }
 
-RS232MONITOR::slotParseTx(QString msg)
+void RS232MONITOR::slotParseTx(QString msg)
 {
     //qDebug()<<Q_FUNC_INFO;
     emit sigForwardTx(msg);
@@ -64,7 +64,7 @@ RS232MONITOR::slotParseTx(QString msg)
     emit sigToFile(msg);
 }
 
-RS232MONITOR::slotClear(bool clicked)
+void RS232MONITOR::slotClear(bool clicked)
 {
     myLog->clear();
 }

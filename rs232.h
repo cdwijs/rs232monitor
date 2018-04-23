@@ -21,15 +21,15 @@ class RS232 : public QWidget
 public:
     RS232(QWidget *parent=0);
 public slots:
-    slotSettings(bool clicked);
-    slotConnect(bool clicked);
-    slotDisconnect(bool clicked);
-    slotMessage(QString string);
-    slotRx();
-    slotRxTimer();
-    slotTxTimer();
+    void slotSettings(bool clicked);
+    void slotConnect(bool clicked);
+    void slotDisconnect(bool clicked);
+    void slotMessage(QString string);
+    void slotRx();
+    void slotRxTimer();
+    void slotTxTimer();
 #ifdef FAKE_MESSAGES
-    slotTimer();
+    void slotTimer();
 #endif
 signals:
     void sigOpenChanged(bool open);
